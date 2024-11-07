@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Mercis{% endblock %}
+
+{% block body %}
+    <h1>Liste des Mercis</h1>
+    <table>
+        <tr>
+            <th>De</th>
+            <th>À</th>
+            <th>Message</th>
+            <th>Date</th>
+        </tr>
+        {% for merci in mercis %}
+            <tr>
+                <td>
+                    {# Afficher l'avatar de l'utilisateur "De" #}
+                    {% if merci.De.avatar %}
+                        <img src="{{ asset('avatars/' ~ merci.De.avatar) }}" alt="Avatar de {{ merci.De.name }}" width="30" height="30">
+                    {% else %}
+                        <img src="{{ asset('avatars/default_avatar.png') }}" alt="Avatar par défaut" width="30" height="30">
+                    {% endif %}
+                    {{ merci.De.name }}
+                </td>
+                <td>
+                    {# Afficher l'avatar de l'utilisateur "À" #}
+                    {% if merci.A.avatar %}
+                        <img src="{{ asset('avatars/' ~ merci.A.avatar) }}" alt="Avatar de {{ merci.A.name }}" width="30" height="30">
+                    {% else %}
+                        <img src="{{ asset('avatars/default_avatar.png') }}" alt="Avatar par défaut" width="30" height="30">
+                    {% endif %}
+                    {{ merci.A.name }}
+                </td>
+                <td>{{ merci.message }}</td>
+                <td>{{ merci.date|date('d/m/Y H:i') }}</td>
+                <td>
+                    <a href="{{ path('app_merci_delete', {'id': merci.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce merci ?')">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <a href="{{ path('app_merci_new') }}">Dire merci</a>
+{% endblock %}

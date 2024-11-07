@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dire Merci{% endblock %}
+
+{% block body %}
+    <h1>Dire Merci</h1>
+
+    {{ form_start(form) }}
+    
+        {# Affichage du champ "De" avec son avatar #}
+        {{ form_row(form.De, {'label': 'De'}) }}
+        <div class="avatar-preview">
+            {% if form.vars.value.De and form.vars.value.De.avatar %}
+                {# Afficher l'avatar de l'utilisateur "De" sélectionné #}
+                <img src="{{ asset('avatars/' ~ form.vars.value.De.avatar) }}" alt="Avatar de {{ form.vars.value.De.name }}" width="30" height="30">
+            {% else %}
+                <img src="{{ asset('avatars/default_avatar.png') }}" alt="Avatar par défaut" width="30" height="30">
+            {% endif %}
+        </div>
+        
+        {# Affichage du champ "À" avec son avatar #}
+        {{ form_row(form.A, {'label': 'À'}) }}
+        <div class="avatar-preview">
+            {% if form.vars.value.A and form.vars.value.A.avatar %}
+                {# Afficher l'avatar de l'utilisateur "À" sélectionné #}
+                <img src="{{ asset('avatars/' ~ form.vars.value.A.avatar) }}" alt="Avatar de {{ form.vars.value.A.name }}" width="30" height="30">
+            {% else %}
+                <img src="{{ asset('avatars/default_avatar.png') }}" alt="Avatar par défaut" width="30" height="30">
+            {% endif %}
+        </div>
+        
+        {# Affichage du champ "Message de remerciement" #}
+        {{ form_row(form.message, {'label': 'Message de remerciement'}) }}
+
+        {# Affichage du champ "Date" #}
+        {{ form_row(form.date, {'label': 'Date'}) }}
+
+        <button class="btn btn-primary">Envoyer le merci</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('app_merci_index') }}">Retour à la liste des Mercis</a>
+{% endblock %}

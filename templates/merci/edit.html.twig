@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Merci{% endblock %}
+
+{% block body %}
+    <h1>Modifier le merci</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.De, {'label': 'De'}) }}
+        {{ form_row(form.A, {'label': 'À'}) }}
+        {{ form_row(form.message, {'label': 'Message'}) }}
+        {{ form_row(form.date, {'label': 'Date'}) }}
+
+        <button class="btn btn-primary">Enregistrer les modifications</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('app_merci_index') }}">Retour à la liste des Mercis</a>
+{% endblock %}
